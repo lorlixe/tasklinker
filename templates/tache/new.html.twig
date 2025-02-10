@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% set action = app.current_route == 'app_tache_new' ? 'Ajout' : 'Édition' %}
+{% block title %}
+	{{ action }}
+	tache
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="example-wrapper">
+		<h1>Modifier une tache
+		</h1>
+
+		{{ form_start(form) }}
+		{{ form_widget(form) }}
+		<button type="submit" class="btn btn-primary">Envoyer</button>
+		{{ form_end(form) }}
+	</div>
+
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projet
+{% endblock %}
+
+{% block body %}
+	<div id="content">
+		<div id="tasks-container">
+			<div class="task-column">
+				<h2>To Do</h2>
+				{% for tache in taches %}
+					{% if tache.statut == "To Do" %}
+						<div class="tasks-list">
+							<a class="task" href="{{ path('app_tache_edit',{id: tache.id}) }}">
+								<h3>{{ tache.titre }}</h3>
+								<p>{{ tache.description }}</p>
+								<div class="task-infos">
+									<div class="task-deadline">
+										<i class="fa-regular fa-calendar"></i>
+										{{ tache.deadline }}
+									</div>
+								</div>
+							</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				<a href="{{ path('app_tache_new') }}" class="task-add">
+					+ Ajouter une tâche
+				</a>
+
+
+			</div>
+			<div class="task-column">
+				<h2>Doing</h2>
+				{% for tache in taches %}
+					{% if tache.statut == "Doing" %}
+						<div class="tasks-list">
+							<a class="task" href="{{ path('app_tache_edit',{id: tache.id}) }}">
+								<h3>{{ tache.titre }}</h3>
+								<p>{{ tache.description }}</p>
+								<div class="task-infos">
+									<div class="task-deadline">
+										<i class="fa-regular fa-calendar"></i>
+										{{ tache.deadline }}
+									</div>
+								</div>
+							</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				<a href="{{ path('app_tache_new') }}" class="task-add">
+					+ Ajouter une tâche
+				</a>
+
+			</div>
+			<div class="task-column">
+				<h2>Done</h2>
+				{% for tache in taches %}
+					{% if tache.statut == "Done" %}
+						<div class="tasks-list">
+							<a class="task" href="{{ path('app_tache_edit',{id: tache.id}) }}">
+								<h3>{{ tache.titre }}</h3>
+								<p>{{ tache.description }}</p>
+								<div class="task-infos">
+									<div class="task-deadline">
+										<i class="fa-regular fa-calendar"></i>
+										{{ tache.deadline }}
+									</div>
+								</div>
+							</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+
+				<a href="{{ path('app_tache_new') }}" class="task-add">
+					+ Ajouter une tâche
+				</a>
+			</div>
+		</div>
+	</div>
+{% endblock %}

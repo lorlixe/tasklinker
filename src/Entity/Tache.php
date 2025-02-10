@@ -2,7 +2,10 @@
 
 namespace App\Entity;
 
+use App\Enum\Statut;
 use App\Repository\TacheRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -21,14 +24,22 @@ class Tache
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dealine = null;
+    private ?\DateTimeInterface $deadline = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $statut = null;
+    private ?Statut $statut = null;
 
-    #[ORM\ManyToOne(inversedBy: 'tache_id')]
+    #[ORM\ManyToOne(inversedBy: 'taches')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?projet $projet_id = null;
+    private ?Projet $projet = null;
+
+    #[ORM\ManyToMany(targetEntity: Employe::class, inversedBy: 'taches')]
+    private Collection $employes;
+
+    public function __construct()
+    {
+        $this->employes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -43,7 +54,6 @@ class Tache
     public function setTitre(string $titre): static
     {
         $this->titre = $titre;
-
         return $this;
     }
 
@@ -55,43 +65,61 @@ class Tache
     public function setDescription(?string $description): static
     {
         $this->description = $description;
-
         return $this;
     }
 
-    public function getDealine(): ?\DateTimeInterface
+    public function getDeadline(): ?\DateTimeInterface
     {
-        return $this->dealine;
+        return $this->deadline;
     }
 
-    public function setDealine(?\DateTimeInterface $dealine): static
+    public function setDeadline(?\DateTimeInterface $deadline): static
     {
-        $this->dealine = $dealine;
-
+        $this->deadline = $deadline;
         return $this;
     }
 
-    public function getStatut(): ?string
+    public function getStatut(): ?Statut
     {
         return $this->statut;
     }
 
-    public function setStatut(string $statut): static
+    public function setStatut(Statut $statut): static
     {
         $this->statut = $statut;
-
         return $this;
     }
 
-    public function getProjetId(): ?projet
+    public function getProjet(): ?Projet
     {
-        return $this->projet_id;
+        return $this->projet;
     }
 
-    public function setProjetId(?projet $projet_id): static
+    public function setProjet(?Projet $projet): static
     {
-        $this->projet_id = $projet_id;
+        $this->projet = $projet;
+        return $this;
+    }
 
+    public function getEmployes(): Collection
+    {
+        return $this->employes;
+    }
+
+    public function addEmploye(Employe $employe): static
+    {
+        if (!$this->employes->contains($employe)) {
+            $this->employes->add($employe);
+            $employe->addTache($this);
+        }
+        return $this;
+    }
+
+    public function removeEmploye(Employe $employe): static
+    {
+        if ($this->employes->removeElement($employe)) {
+            $employe->removeTache($this);
+        }
         return $this;
     }
 }

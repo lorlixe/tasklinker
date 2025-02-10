@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\Contrat;
 use App\Repository\EmployeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -26,7 +27,7 @@ class Employe
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $contrat = null;
+    private ?Contrat $contrat = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_arrivee = null;
@@ -34,6 +35,8 @@ class Employe
     #[ORM\ManyToMany(targetEntity: Projet::class, mappedBy: 'projets')]
     private Collection $projets;
 
+    #[ORM\ManyToMany(targetEntity: Projet::class, mappedBy: 'tache')]
+    private Collection $taches;
     public function __construct()
     {
         $this->projets = new ArrayCollection();
@@ -80,12 +83,12 @@ class Employe
         return $this;
     }
 
-    public function getContrat(): ?string
+    public function getContrat(): ?Contrat
     {
         return $this->contrat;
     }
 
-    public function setContrat(string $contrat): static
+    public function setContrat(Contrat $contrat): static
     {
         $this->contrat = $contrat;
 
@@ -124,6 +127,30 @@ class Employe
     public function removeProjet(Projet $projet): static
     {
         $this->projets->removeElement($projet);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, tache>
+     */
+    public function getTache(): Collection
+    {
+        return $this->taches;
+    }
+
+    public function addTache(Tache $tache): static
+    {
+        if (!$this->taches->contains($tache)) {
+            $this->taches->add($tache);
+        }
+
+        return $this;
+    }
+
+    public function removeTache(Tache $tache): static
+    {
+        $this->taches->removeElement($tache);
 
         return $this;
     }

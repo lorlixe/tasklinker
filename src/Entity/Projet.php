@@ -19,11 +19,6 @@ class Projet
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date_demarrage = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $deadline = null;
 
     #[ORM\Column]
     private ?bool $archive = null;
@@ -56,30 +51,6 @@ class Projet
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
-
-        return $this;
-    }
-
-    public function getDateDemarrage(): ?\DateTimeInterface
-    {
-        return $this->date_demarrage;
-    }
-
-    public function setDateDemarrage(\DateTimeInterface $date_demarrage): static
-    {
-        $this->date_demarrage = $date_demarrage;
-
-        return $this;
-    }
-
-    public function getDeadline(): ?\DateTimeInterface
-    {
-        return $this->deadline;
-    }
-
-    public function setDeadline(\DateTimeInterface $deadline): static
-    {
-        $this->deadline = $deadline;
 
         return $this;
     }
@@ -142,7 +113,6 @@ class Projet
     {
         if (!$this->tache_id->contains($tacheId)) {
             $this->tache_id->add($tacheId);
-            $tacheId->setProjetId($this);
         }
 
         return $this;
@@ -152,8 +122,7 @@ class Projet
     {
         if ($this->tache_id->removeElement($tacheId)) {
             // set the owning side to null (unless already changed)
-            if ($tacheId->getProjetId() === $this) {
-                $tacheId->setProjetId(null);
+            if ($tacheId->getProjet() === $this) {
             }
         }
 
