@@ -29,7 +29,7 @@ class Projet
     /**
      * @var Collection<int, Tache>
      */
-    #[ORM\OneToMany(targetEntity: Tache::class, mappedBy: 'projet_id', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Tache::class, mappedBy: 'projet', orphanRemoval: true)]
     private Collection $tache_id;
 
     public function __construct()

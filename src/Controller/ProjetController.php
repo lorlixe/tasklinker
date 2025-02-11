@@ -24,15 +24,15 @@ final class ProjetController extends AbstractController
     }
 
 
-    #[Route('/{id}', name: 'app_projet_show', requirements: ['id' => '\d+'], methods: ['GET'])]
+    #[Route('projet/{id}', name: 'app_projet_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(?Projet $projet): Response
     {
 
-        return $this->forward('App\Controller\TacheController::index');
+        return $this->forward('App\Controller\TacheController::index', ['projet_id' => $projet->getId()]);
     }
 
-    #[Route('/new', name: 'app_projet_new', methods: ['GET', 'POST'])]
-    #[Route('/{id}/edit', name: 'app_projet_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/projet/new', name: 'app_projet_new', methods: ['GET', 'POST'])]
+    #[Route('/{id}/projet/edit', name: 'app_projet_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?Projet $projet, Request $request, EntityManagerInterface $manager): Response
     {
         $projet ??= new Projet();
@@ -51,5 +51,18 @@ final class ProjetController extends AbstractController
             'controller_name' => 'Projet',
             'form' => $form,
         ]);
+    }
+
+    #[Route('/{id}/projet/supprimer', name: 'app_projet_remove', requirements: ['id' => '\d+'],  methods: ['GET', 'POST'])]
+    public function remove(?Projet $projet, EntityManagerInterface $entityManager): Response
+    {
+        if (!$projet) {
+            return $this->redirectToRoute('app_projet');
+        }
+
+        $entityManager->remove($projet);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_projet');
     }
 }

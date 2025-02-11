@@ -37,7 +37,7 @@ final class EmployeController extends AbstractController
     //     ]);
     // }
 
-    #[Route('/{id}/supprimer', name: 'app_employe_remove', requirements: ['id' => '\d+'],  methods: ['GET', 'POST'])]
+    #[Route('/{id}/employe/supprimer', name: 'app_employe_remove', requirements: ['id' => '\d+'],  methods: ['GET', 'POST'])]
     public function remove(?Employe $employe): Response
     {
         $this->entityManager->remove($employe);
@@ -48,7 +48,7 @@ final class EmployeController extends AbstractController
 
 
     #[Route('employe/new', name: 'app_employe_new', methods: ['GET', 'POST'])]
-    #[Route('/{id}/edit', name: 'app_employe_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/{id}/employe/edit', name: 'app_employe_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?Employe $employe, Request $request, EntityManagerInterface $manager): Response
     {
         $employe ??= new Employe();

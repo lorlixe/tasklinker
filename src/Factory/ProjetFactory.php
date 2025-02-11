@@ -35,9 +35,9 @@ final class ProjetFactory extends PersistentProxyObjectFactory
     {
         return [
             'archive' => self::faker()->boolean(),
-            'date_demarrage' => self::faker()->dateTime(),
-            'deadline' => self::faker()->dateTime(),
             'nom' => self::faker()->sentence(),
+            'employe' => EmployeFactory::random(),
+
         ];
     }
 

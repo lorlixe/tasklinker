@@ -23,7 +23,7 @@ class Tache
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $deadline = null;
 
     #[ORM\Column(length: 255)]
@@ -114,6 +114,15 @@ class Tache
         }
         return $this;
     }
+    public function setEmploye(Employe $employe): static
+    {
+        if (!$this->employes->contains($employe)) {
+            $this->employes->add($employe);
+        }
+
+        return $this;
+    }
+
 
     public function removeEmploye(Employe $employe): static
     {

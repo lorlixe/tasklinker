@@ -9,15 +9,16 @@
 			<div class="task-column">
 				<h2>To Do</h2>
 				{% for tache in taches %}
-					{% if tache.statut == "To Do" %}
+					{% if tache.statut.value == "To Do" %}
 						<div class="tasks-list">
-							<a class="task" href="{{ path('app_tache_edit',{id: tache.id}) }}">
+							<a class="task" href="{{ path('app_tache_edit',{id: tache.id, projet_id: projet_id}) }}">
 								<h3>{{ tache.titre }}</h3>
 								<p>{{ tache.description }}</p>
 								<div class="task-infos">
 									<div class="task-deadline">
-										<i class="fa-regular fa-calendar"></i>
-										{{ tache.deadline }}
+										<i class="fa-regular fa-calendar">
+											{{ tache.deadline|date('d/m/Y') }}
+										</i>
 									</div>
 								</div>
 							</a>
@@ -25,7 +26,7 @@
 					{% endif %}
 				{% endfor %}
 
-				<a href="{{ path('app_tache_new') }}" class="task-add">
+				<a class="task-add" href="{{ path('app_tache_new',{projet_id: projet_id}) }}">
 					+ Ajouter une tâche
 				</a>
 
@@ -34,15 +35,15 @@
 			<div class="task-column">
 				<h2>Doing</h2>
 				{% for tache in taches %}
-					{% if tache.statut == "Doing" %}
+					{% if tache.statut.value == "Doing" %}
 						<div class="tasks-list">
-							<a class="task" href="{{ path('app_tache_edit',{id: tache.id}) }}">
+							<a class="task" href="{{ path('app_tache_edit',{id: tache.id, projet_id: projet_id}) }}">
 								<h3>{{ tache.titre }}</h3>
 								<p>{{ tache.description }}</p>
 								<div class="task-infos">
 									<div class="task-deadline">
 										<i class="fa-regular fa-calendar"></i>
-										{{ tache.deadline }}
+										{{ tache.deadline|date('d/m/Y') }}
 									</div>
 								</div>
 							</a>
@@ -50,7 +51,7 @@
 					{% endif %}
 				{% endfor %}
 
-				<a href="{{ path('app_tache_new') }}" class="task-add">
+				<a class="task-add" href="{{ path('app_tache_new',{projet_id: projet_id}) }}">
 					+ Ajouter une tâche
 				</a>
 
@@ -58,15 +59,15 @@
 			<div class="task-column">
 				<h2>Done</h2>
 				{% for tache in taches %}
-					{% if tache.statut == "Done" %}
+					{% if tache.statut.value == "Done" %}
 						<div class="tasks-list">
-							<a class="task" href="{{ path('app_tache_edit',{id: tache.id}) }}">
+							<a class="task" href="{{ path('app_tache_edit',{id: tache.id, projet_id: projet_id}) }}">
 								<h3>{{ tache.titre }}</h3>
 								<p>{{ tache.description }}</p>
 								<div class="task-infos">
 									<div class="task-deadline">
 										<i class="fa-regular fa-calendar"></i>
-										{{ tache.deadline }}
+										{{ tache.deadline|date('d/m/Y') }}
 									</div>
 								</div>
 							</a>
@@ -74,7 +75,7 @@
 					{% endif %}
 				{% endfor %}
 
-				<a href="{{ path('app_tache_new') }}" class="task-add">
+				<a class="task-add" href="{{ path('app_tache_new',{projet_id: projet_id}) }}">
 					+ Ajouter une tâche
 				</a>
 			</div>

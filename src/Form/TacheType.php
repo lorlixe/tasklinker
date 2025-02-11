@@ -8,6 +8,7 @@ use App\Entity\Projet;
 use App\Enum\Statut;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,19 +20,26 @@ class TacheType extends AbstractType
         $builder
             ->add('titre')
             ->add('description')
-            ->add('dealine', null, [
-                'widget' => 'single_text'
+
+            ->add('deadline', DateType::class, [
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd'
             ])
             ->add('statut', EnumType::class, [
                 'class' => Statut::class,
+                'choices' => Statut::cases(),
+                'choice_label' => fn(Statut $statut) => $statut->name,
             ])
-            ->add('projet_id', EntityType::class, [
-                'class' => Projet::class,
-                'choice_label' => 'id',
-            ])
-            ->add('employe', EntityType::class, [
+            // ->add('projet', EntityType::class, [
+            //     'class' => Projet::class,
+            //     'choice_label' => 'nom',
+            //     'placeholder' => 'Sélectionner un projet',
+            // ])
+            ->add('employes', EntityType::class, [
                 'class' => Employe::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
+                'multiple' => true,
+                'expanded' => false,
             ])
         ;
     }

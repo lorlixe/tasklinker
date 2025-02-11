@@ -32,11 +32,13 @@ class Employe
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_arrivee = null;
 
-    #[ORM\ManyToMany(targetEntity: Projet::class, mappedBy: 'projets')]
+    #[ORM\ManyToMany(targetEntity: Projet::class, mappedBy: 'employes')]
     private Collection $projets;
 
-    #[ORM\ManyToMany(targetEntity: Projet::class, mappedBy: 'tache')]
+    #[ORM\ManyToMany(targetEntity: Tache::class, mappedBy: 'employes')]
     private Collection $taches;
+
+
     public function __construct()
     {
         $this->projets = new ArrayCollection();

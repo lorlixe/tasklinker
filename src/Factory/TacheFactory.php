@@ -37,7 +37,11 @@ final class TacheFactory extends PersistentProxyObjectFactory
         return [
             'projet' => ProjetFactory::random(),
             'statut' => self::faker()->randomElement(Statut::cases()),
-            'titre' => self::faker()->text(255),
+            'titre' => self::faker()->sentence(),
+            'description' => self::faker()->text(255),
+            'employe' => EmployeFactory::random(),
+            'deadline' => self::faker()->dateTimeBetween('-1 year', '+1 year'),
+
         ];
     }
 
