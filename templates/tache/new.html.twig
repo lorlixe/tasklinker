@@ -8,15 +8,31 @@
 
 {% block body %}
 
+	<header>
+		<div id="current-user"></div>
+		<div id="title-page">
+			<div class="flex-header">
+				<h1>Gestion des droits d'accès
+				</h1>
+			</div>
+		</div>
+	</header>
 
-	<div class="example-wrapper">
-		<h1>Modifier une tache
-		</h1>
+	<div id="content">
+
 
 		{{ form_start(form) }}
 		{{ form_widget(form) }}
-		<button type="submit" class="btn btn-primary">Envoyer</button>
+		<button type="submit" class="button button-submit">Envoyer</button>
+		{% if app.current_route == "app_tache_edit" %}
+
+			<a class="delete-task" href="{{ path('app_tache_remove',{tache_id: tache_id, projet_id: projet_id}) }}">
+
+				Supprimer la tâche</a>
+		{% endif %}
 		{{ form_end(form) }}
+
+
 	</div>
 
 {% endblock %}

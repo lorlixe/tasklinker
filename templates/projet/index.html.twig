@@ -4,24 +4,36 @@
 {% endblock %}
 {% block body %}
 
+	<header>
+		<div id="current-user"></div>
+		<div id="title-page">
+			<div class="flex-header">
+				<h1>Projet</h1>
+
+			</div>
+		</div>
+	</header>
 
 	<div id="content">
 		<div id="projects-container">
 			{% for projet in projets %}
+				{% if not projet.archive %}
+					<article class="card-project">
+						<a href="{{ path('app_projet_show',{id: projet.id}) }}">
+							<h2>{{ projet.nom }}</h2>
 
-				<article class="card-project">
-					<a href="{{ path('app_projet_show',{id: projet.id}) }}">
-						<h2>{{ projet.nom }}</h2>
-					</a>
-					<div class="card-project-icons">
-						<a href="{{ path('app_projet_edit',{id: projet.id}) }}">
-							<i class="fa-solid fa-pen"></i>
 						</a>
-						<a href="{{ path('app_projet_remove',{id: projet.id}) }}">
-							<i class="fa-solid fa-trash"></i>
-						</a>
-					</div>
-				</article>
+						<div class="card-project-icons">
+							<a href="{{ path('app_projet_edit',{id: projet.id}) }}">
+								<i class="fa-solid fa-pen"></i>
+							</a>
+							<a href="{{ path('app_projet_remove',{id: projet.id}) }}">
+								<i class="fa-solid fa-trash"></i>
+							</a>
+						</div>
+					</article>
+				{% endif %}
+
 
 			{% else %}
 				<li>Aucun enregistrement en base de données.</li>

@@ -8,14 +8,20 @@
 
 {% block body %}
 
-
-	<div class="example-wrapper">
-		<h1>Modifier un utilisateur
-		</h1>
+	<header>
+		<div id="current-user"></div>
+		<div id="title-page">
+			<div class="flex-header">
+				<h1>{{employe.nom}}
+					{{employe.prenom}}</h1>
+			</div>
+		</div>
+	</header>
+	<div id="content">
 
 		{{ form_start(form) }}
 		{{ form_widget(form) }}
-		<button type="submit" class="btn btn-primary">Envoyer</button>
+		<button type="submit" class="button button-submit">Envoyer</button>
 		{{ form_end(form) }}
 	</div>
 

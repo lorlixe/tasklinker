@@ -61,14 +61,12 @@ final class EmployeController extends AbstractController
             $manager->persist($employe);
             $manager->flush();
 
-            return $this->redirectToRoute('app_employe_show', [
-                'id' => $employe->getId(),
-                'controller_name' => 'Employe',
-            ],);
+            return $this->redirectToRoute('app_employe_index');
         }
         return $this->render('employe/new.html.twig', [
             'controller_name' => 'Employe',
             'form' => $form,
+            'employe' => $employe
         ]);
     }
 }

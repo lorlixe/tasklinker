@@ -15,13 +15,16 @@ class ProjetType extends AbstractType
     {
         $builder
             ->add('nom')
-
-            ->add('archive')
             ->add('employes', EntityType::class, [
                 'class' => Employe::class,
-                'choice_label' => 'id',
+                'choice_label' => function (Employe $employe) {
+                    return $employe->getPrenom() . ' ' . $employe->getNom();
+                },
                 'multiple' => true,
+                'expanded' => false,
+
             ])
+            ->add('archive')
         ;
     }
 

@@ -4,6 +4,14 @@
 {% endblock %}
 
 {% block body %}
+	<header>
+		<div id="current-user"></div>
+		<div id="title-page">
+			<div class="flex-header">
+				<h1>Équipe</h1>
+			</div>
+		</div>
+	</header>
 	<div id="content">
 		<table id="team-container">
 			<thead>
@@ -20,17 +28,17 @@
 						<td>
 							<div class="employee-infos">
 								<div class="employee-avatar">
-									ND
+									{{ employe.nom|slice(0,1)|upper }}{{ employe.prenom|slice(0,1)|upper }}
 								</div>
 								<div class="employee-coords">
-									<strong>{{ employe.nom }}</strong>
-									<strong>{{ employe.prenom }}</strong>
+									<strong>{{ employe.nom }}
+										{{ employe.prenom }}</strong>
 
 									<span>{{ employe.email }}</span>
 								</div>
 							</div>
 						</td>
-						<td>{{ employe.contrat }}</td>
+						<td>{{ employe.contrat.value }}</td>
 						<td>
 							<a class="button button-edit-team" href="{{ path('app_employe_edit',{id: employe.id}) }}">
 								Éditer

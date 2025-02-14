@@ -28,7 +28,7 @@ final class ProjetController extends AbstractController
     public function show(?Projet $projet): Response
     {
 
-        return $this->forward('App\Controller\TacheController::index', ['projet_id' => $projet->getId()]);
+        return $this->forward('App\Controller\TacheController::index', ['projet' => $projet]);
     }
 
     #[Route('/projet/new', name: 'app_projet_new', methods: ['GET', 'POST'])]
@@ -50,6 +50,7 @@ final class ProjetController extends AbstractController
         return $this->render('projet/new.html.twig', [
             'controller_name' => 'Projet',
             'form' => $form,
+            'projet' => $projet
         ]);
     }
 

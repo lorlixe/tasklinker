@@ -25,11 +25,11 @@ class EmployeType extends AbstractType
             ->add('date_arrivee', null, [
                 'widget' => 'single_text'
             ])
-            ->add('projets', EntityType::class, [
-                'class' => Projet::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
+            // ->add('projets', EntityType::class, [
+            //     'class' => Projet::class,
+            //     'choice_label' => 'id',
+            //     'multiple' => true,
+            // ])
         ;
     }
 
