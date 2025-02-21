@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
+
 #[ORM\Entity(repositoryClass: EmployeRepository::class)]
 class Employe
 {
@@ -19,24 +20,20 @@ class Employe
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Ce champ ne peut pas être vide")]
+    #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Ce champ ne peut pas être vide")]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Ce champ ne peut pas être vide")]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Ce champ ne peut pas être vide")]
     private ?Contrat $contrat = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\NotBlank(message: "Ce champ ne peut pas être vide")]
     private ?\DateTimeInterface $date_arrivee = null;
 
     #[ORM\ManyToMany(targetEntity: Projet::class, mappedBy: 'employes')]

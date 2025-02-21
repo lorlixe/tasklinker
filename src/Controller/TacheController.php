@@ -97,7 +97,7 @@ final class TacheController extends AbstractController
 
         return $this->render('tache/new.html.twig', [
             'controller_name' => 'Tache',
-            'form' => $form->createView(),
+            'form' => $form,
             'tache_id' => $tache->getId(),
             'projet_id' => $projet_id,
 

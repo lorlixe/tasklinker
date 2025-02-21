@@ -20,14 +20,18 @@ class TacheType extends AbstractType
     {
         $builder
             ->add('titre', TextType::class, [
-                'label' => 'Titre de la tâche'
+                'label' => 'Titre de la tâche',
+                'empty_data' => '',
+
             ])
 
             ->add('description')
 
             ->add('deadline', DateType::class, [
                 'widget' => 'single_text',
-                'format' => 'yyyy-MM-dd'
+                'format' => 'yyyy-MM-dd',
+                'empty_data' => null
+
             ])
             ->add('statut', EnumType::class, [
                 'class' => Statut::class,

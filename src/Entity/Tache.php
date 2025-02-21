@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: TacheRepository::class)]
 class Tache
@@ -18,15 +20,19 @@ class Tache
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Ce champ ne peut pas être vide")]
     private ?string $titre = null;
+
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotNull(message: "Ce champ ne peut pas être vide")]
     private ?\DateTimeInterface $deadline = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotNull(message: "Ce champ ne peut pas être vide")]
     private ?Statut $statut = null;
 
     #[ORM\ManyToOne(inversedBy: 'taches')]
