@@ -19,7 +19,7 @@ final class ProjetController extends AbstractController
         $projets = $repository->findAll();
         return $this->render('projet/index.html.twig', [
             'controller_name' => 'Projet',
-            'projets' => $projets
+            'projets' => $projets,
         ]);
     }
 

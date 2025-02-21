@@ -28,26 +28,35 @@
 					<img src="/img/logo.png" alt="Logo TaskLinker"/>
 				</a>
 				<ul id="main-menu">
-					<li class="active">
-						<a href="{{ path('app_projet') }}">
-							<i class="fa-solid fa-list-check"></i>
-							Projets
-						</a>
-					</li>
-					<li>
-						<a href="{{ path('app_employe_index') }}">
-							<i class="fa-regular fa-user"></i>
-							Équipe
-						</a>
-					</li>
-				</ul>
-			</nav>
-			<main>
+					{% if class_employe is not defined %}
+						<li class="active">
+						{% else %}
+							<li>
+							{% endif %}
+							<a href="{{ path('app_projet') }}">
+								<i class="fa-solid fa-list-check"></i>
+								Projets
+							</a>
+						</li>
+						{% if class_employe is not defined %}
+							<li>
+							{% else %}
+								<li class="active">
+								{% endif %}
+								<a href="{{ path('app_employe_index') }}">
+									<i class="fa-regular fa-user"></i>
+									Équipe
+								</a>
+							</li>
+						</ul>
+					</nav>
+					<main>
 
 
-				{% block body %}{% endblock %}
-			</main>
-		</div>
+						{% block body %}{% endblock %}
+					</main>
+				</body>
+			</html>
+		</body>
 	</body>
-
-</html>
+</html></div></body></html>

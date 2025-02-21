@@ -25,7 +25,9 @@ final class EmployeController extends AbstractController
         $employes = $repository->findAll();
         return $this->render('employe/index.html.twig', [
             'controller_name' => 'Employe',
-            'employes' => $employes
+            'employes' => $employes,
+            'class_employe' => 'active',
+
         ]);
     }
 
@@ -66,7 +68,9 @@ final class EmployeController extends AbstractController
         return $this->render('employe/new.html.twig', [
             'controller_name' => 'Employe',
             'form' => $form,
-            'employe' => $employe
+            'employe' => $employe,
+            'class_employe' => 'active',
+
         ]);
     }
 }
