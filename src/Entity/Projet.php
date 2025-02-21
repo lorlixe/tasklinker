@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: ProjetRepository::class)]
 class Projet
@@ -17,13 +19,15 @@ class Projet
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Ce champ ne peut pas être vide")]
     private ?string $nom = null;
 
 
-    #[ORM\Column]
-    private ?bool $archive = null;
+    #[ORM\Column(type: 'boolean')]
+    private ?bool $archive = false;
 
     #[ORM\ManyToMany(targetEntity: Employe::class, inversedBy: 'projets')]
+    #[Assert\NotBlank(message: "Ce champ ne peut pas être vide")]
     private Collection $employes;
 
     /**

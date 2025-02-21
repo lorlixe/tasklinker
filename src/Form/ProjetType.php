@@ -24,7 +24,7 @@ class ProjetType extends AbstractType
                 'expanded' => false,
 
             ])
-            ->add('archive')
+            // ->add('archive')
         ;
     }
 

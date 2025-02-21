@@ -54,14 +54,26 @@ final class ProjetController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/projet/supprimer', name: 'app_projet_remove', requirements: ['id' => '\d+'],  methods: ['GET', 'POST'])]
+    // #[Route('/{id}/projet/supprimer', name: 'app_projet_remove', requirements: ['id' => '\d+'],  methods: ['GET', 'POST'])]
+    // public function remove(?Projet $projet, EntityManagerInterface $entityManager): Response
+    // {
+    //     if (!$projet) {
+    //         return $this->redirectToRoute('app_projet');
+    //     }
+
+    //     $entityManager->remove($projet);
+    //     $entityManager->flush();
+
+    //     return $this->redirectToRoute('app_projet');
+    // }
+
+    #[Route('/{id}/projet/archive', name: 'app_projet_archive', requirements: ['id' => '\d+'],  methods: ['GET', 'POST'])]
     public function remove(?Projet $projet, EntityManagerInterface $entityManager): Response
     {
         if (!$projet) {
             return $this->redirectToRoute('app_projet');
         }
-
-        $entityManager->remove($projet);
+        $projet->setArchive(1);
         $entityManager->flush();
 
         return $this->redirectToRoute('app_projet');
